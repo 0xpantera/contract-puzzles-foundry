@@ -4,21 +4,16 @@ pragma solidity ^0.8.13;
 import "forge-std/Test.sol";
 import "../src/Contract5.sol";
 
-contract CounterTest is Test {
-    Counter public counter;
+contract Contract5Test is Test {
+    Contract5 public game;
 
     function setUp() public {
-        counter = new Counter();
-        counter.setNumber(0);
+        game = new Contract5();
+        startHoax(0x000FfFfffFFFFfFFfFFFFFfFFFfFffffFFffFfFF);
     }
 
-    function testIncrement() public {
-        counter.increment();
-        assertEq(counter.number(), 1);
-    }
-
-    function testSetNumber(uint256 x) public {
-        counter.setNumber(x);
-        assertEq(counter.number(), x);
+    function testWin() public {
+        game.win();
+        assertTrue(game.isWon(), 'You did not win the game');
     }
 }
